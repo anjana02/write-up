@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/blog.css  ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover the Exfil</title>
+
+
+</head>
+<body>
+    <header>
+        <h1>Discover the Exfil</h1>
+    </header>
+
+    <div class="wrapper">
+        <div class="container">
+            <p><strong>Flag:</strong> <span class="flag">AdversaryVillage{ea7ca7f1371f1986aec81a8b34b4c6a2}</span></p>
+            <p><strong>Description:</strong>
+                During a stealthy compromise on an internal server of Adversary City, the attacker managed
+                to siphon off user credentials through a covert C2 channel. The SOC team has recovered a single,
+                tantalizing clue: a text file extracted from the stolen data. Your mission is to delve into this file, unravel
+                the secrets it holds, and uncover the true extent of the breach. Can you piece together the puzzle and
+                reveal the hidden information? The security of Adversary City depends on your expertise!
+            </p>            
+            <h2>Walkthrough:</h2>
+            <img src="img/er2.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+            <ol>
+                <li>Convert the <strong> exfil.txt</strong> file provided with the challenge to zip file using base64 decoding using any of your favorite terminal.</li>
+                <img src="img/e1.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                <li>The ZIP file contains a Mozilla Firefox Browser profile that was exfiltrated by the APT group.</li>
+                <img src="img/e2.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                <li>Extract the zip file and replace the files in the Firefox profiles folder of your local machine.
+                    Windows and Linux will have different locations to store the Mozilla user profiles.</li>
+                <img src="img/e3.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                <li>Now open Firefox to load the exfiltrated browser profile and check the data within the profile. Check the saved logons to find the final flag.</li>
+                <img src="img/e4.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+            </ol>
+        </div>
+    </div>
+    <footer>
+        </p>
+        <p>&copy; 2024 Adversary Village. All rights reserved. | <a href="#">Contact Us</a></p>
+    </footer>
+</body>
+</html>

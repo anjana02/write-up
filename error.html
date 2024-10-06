@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/blog.css  ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover the Exfil</title>
+
+
+</head>
+<body>
+    <header>
+        <h1>Discover the Exfil</h1>
+    </header>
+
+    <div class="wrapper">
+        <div class="container">
+            <p><strong>Flag:</strong> <span class="flag">AdversaryVillage{21945b1878c10a0e95d5b5e02f40b821}</span></p>
+            <p><strong>Description:</strong>
+                Meet h0ppEr07, a developer at Adversary City Hospital known for their exceptional coding
+                skills. However, even the best make mistakes, and h0ppEr07 is no exception, often falling prey to human
+                errors. Your challenge is to scrutinize h0ppEr07&#39;s code, uncover the slip-up, and claim your flag. Can you
+                spot the mistake and crack the code? The reputation of Adversary City Hospital&#39;s cybersecurity rests on
+                your sharp eye!
+            </p>            
+            <h2>Walkthrough:</h2>
+            <img src="img/er3.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+            <ol>
+                <li>Identify the h0ppEr07’s public GitHub repository using open source intelligence gathering techniques.</li>
+                <img src="img/r1.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                <li>Navigate through the recent commits which were made within the GitHub repository “equipment-inventory”.</li>
+                <img src="img/r2.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                <li>There is a comment that was deleted through one of the Git commits by the repository owner.</li>
+                <li>The comment that was removed by the user is a portion of a Postman public workspace URL.</li>
+                <li>Navigate to the Postman public workspace URL by adding the root domain to the workspace details disclosed: <a href=" https://www.postman.com/equipment-inventory/workspace/"> https://www.postman.com/equipment-inventory/workspace/</a></li>
+                <img src="img/r3.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                <li>There is an existing API collection within the Postman URL discovered. Analyze the details of the API endpoints.</li>
+                <li>Navigate to the API endpoint to fetch the account details and observe the HTTP request headers configured.</li>
+                <li>The final flag will be in the HTTP headers section of the API endpoint.</li>
+                <img src="img/r4.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+            </ol>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Adversary Village. All rights reserved. | <a href="#">Contact Us</a></p>
+    </footer>
+</body>
+</html>

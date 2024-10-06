@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/blog.css  ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover the APT Tactic</title>
+
+
+</head>
+<body>
+    <header>
+        <h1>Discover the APT Tactic</h1>
+    </header>
+
+    <div class="wrapper">
+        <div class="container">
+            <p><strong>Flag:</strong> <span class="flag">AdversaryVillage{ab7fcf1851b4ed9a40f28bb625b58043}</span></p>
+            
+            <p><strong>Description:</strong>
+                In the heart of Adversary City, a critical web application server has fallen into the hands of a
+                notorious APT group. This cunning adversary leveraged a sophisticated web application attack to breach
+                the server&#39;s defenses. Now, the investigation team is left with a single clue: a log file, brimming with
+                cryptic traces of the attack. Your mission is to decipher the logs, uncover the attack vector, discover the
+                removed code and track down the elusive APT group to capture the coveted flag. Will you rise to the
+                challenge and outsmart the adversaries? The fate of Adversary City rests in your hands!
+            </p>            
+            <h2>Walkthrough:</h2>
+            <img src="img/er1.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+            <ol>
+                <li> <p>Navigate through the Log file provided as part of the challenge. </p></li>
+                <img src="img/b2.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                <li>Identify the NPM package <strong>Webpack-AltEsc</strong> being updated. There is an indication in the logs that the NPM package was not found in the initial update.</li>
+                <li>Note the indication in the logs that the NPM package was not found during the initial update.</li>
+                <li>The attack type used here is called “<strong>Dependency Confusion</strong>.”</li>
+                <img src="img/b3.png" alt="Log file details" style="width: 100%; max-width: 600px;"> <br>
+                <li>The APT group strategically pushed a malicious NPM package instead of the legitimate one, targeting the public repository.</li><br>
+                <img src="img/b4.png" alt="Log file details" style="width: 100%; max-width: 600px;"> <br>
+                <li>The application during a routine update, fetched the malicious NPM package hosted by the attacker and this resulted in the compromise.</li><br>
+                <img src="img/b5.png" alt="Log file details" style="width: 100%; max-width: 600px;"> <br>
+                <li>A snapshot the NPM package is available on Way back machine in case of the NPM package is removed by the scanners</li><br>
+                <img src="img/b6.png" alt="Log file details" style="width: 100%; max-width: 600px;"> <br>
+            </ol>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Adversary Village. All rights reserved. | <a href="#">Contact Us</a></p>
+    </footer>
+</body>
+</html>

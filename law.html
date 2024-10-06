@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/blog.css  ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adversary city</title>
+
+
+</head>
+
+<body>
+    <header>
+        <h1>THE ADVERSARY CITY:LAW ENFORCEMENT BREACH</h1>
+    </header>
+
+    <div class="wrapper">
+        <div class="container">
+            <p>
+                Initially the participants are given with leaked terraform script which is used for automating
+                configuration which is used by Law enforcement agencies infrastructure engineers
+                <br>
+                <img src="img/l1.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                Upon extracting the terraform we observed pieces of script pointing to one of the AWS service
+                CODECOMMIT. CODECOMMIT is decommissioned for new aws users but its still active for old
+                customers 
+                <br>
+                <img src="img/l2.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                On analysis of Code we observed aws CODECOMMIT credentials are base64 encoded and
+                passed directly through terraform script. <br>
+                The pieces of CODECOMMIT url is being passed separately on backup.tf
+                <br>
+                <img src="img/l3.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                Up on Decoding the base46 encoded data data the attacker got the an username and password
+                separated by semicolon as said in the above code <br>
+                <img src="img/l4.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                On initial google search the attacker identified the URL construction for AWS CODECOMMIT
+                <img src="img/l5.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                With the base64 encoded data and the user credentials of AWS CODECOMMIT. The attacker
+                tried cloning the repository and it was successful
+                <img src="img/l6.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                ON analysing the LawEnforcement_Adversary City repo on AWS . The attacker observed some
+                sensitive internal python script which is used for pushing logs to S3 buckets and involving
+                cloudtrail. The bad practice of hardcoding AWS Secrets on python script makes the attack
+                stretch to another conclusion
+                <br>
+                <img src="img/l7.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                <img src="img/l8.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                The attacker exfiltrated the AWS keys and configured them to elevate the access . the attacker
+                hits the sts endpoint to understand if the user is still active.
+                <br>
+                <img src="img/l9.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                Up on enumerating different services the attacker was able to find a lateral movement from
+                CODECOMMIT to SECRET MANAGER service.
+                Hitting the list secrets api in ap-south-1 for secret manager gives as a stored secret of
+                Lawenforcement agency
+                <br>
+                <img src="img/l10.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                The attacker finally hitting the get-secret-value endpoint and exfiltrated the secrets and other
+                sensitive information.
+                <img src="img/l11.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+            </p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Adversary Village. All rights reserved. | <a href="#">Contact Us</a></p>
+    </footer>
+</body>
+
+</html>

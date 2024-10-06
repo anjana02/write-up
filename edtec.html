@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/blog.css  ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adversary city</title>
+
+
+</head>
+
+<body>
+    <header>
+        <h1>ADVERSARY CITY: IT EDTECH UNDER SIEGE</h1>
+    </header>
+
+    <div class="wrapper">
+        <div class="container">
+            <p>
+                Initially an employee of an edtech startup provides a GOLANG file which helps premium
+                customers to reach to their product infrastructure for certain migration activities related to
+                container services. This is leaked due to data breach of one their customer’s code artifactory <br>
+
+                <img src="img/d1.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                On analyzing the code the attacker finds that the IT company is using ECR for container
+                repository services. There was no information about any other things <br>
+
+                <img src="img/d2.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                On further researching the attacker identified the way to get the ECR repository url
+
+                <img src="img/d3.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                He gained insights about a possible misconfiguration that can be placed in ECR. The
+                misconfigurations allows an External aws account user to pull container images from ECR and
+                to the target AWS account , if Resource based Permission is set to wild card for Principal and
+                account id
+                The prerequisites to launch the attack involves an attacker owned external aws account with
+                user permissions below <br>
+
+                <img src="img/d4.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+                We tried to authenticate docker using aws with the use of GetAuthorizationToken API hit with the
+                external account.
+
+                <img src="img/d5.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                After successfully logging in .We try for find the misconfigured ECR with wildcard Resource based
+                permission and tried pulling the ECR repository found on the GOLANG file above <br>
+                <img src="img/d6.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                After successfully pulling from ECR. the attacker enumerated the docker image tags and id
+                <img src="img/d7.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                The attacker tried accessing the container using docker with an expectation of getting an interactive
+                shell and he gained the shell
+                <img src="img/d8.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                On enumerating the linux container. The attacker fetched the .env file which contain sensitive
+                information of AWS keys and the attacker exfiltrated it
+                <img src="img/d9.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                Configuring the keys give the active username with the help of sts endpoint
+                <img src="img/d10.png" alt="Log file details" style="width: 100%; max-width: 600px;" ><br>
+                Enumerating different services results in an explicit denial ,except while reaching on “Parameter
+                store”. The attacker got a hit for parameter store and enumerated parameter available on the region us-east-1 
+                <br>
+                <img src="img/d11.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                The attacker found a parameter and tried exfiltrating the parameter value for getting sensitive information about the EDTECH startup and was able to exfiltrate it.
+                <br>
+                <img src="img/d12.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+            </p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Adversary Village. All rights reserved. | <a href="#">Contact Us</a></p>
+    </footer>
+</body>
+
+</html>
