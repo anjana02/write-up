@@ -1,0 +1,176 @@
+* {
+  margin: 0;
+  padding: 0; 
+}
+
+.navigation {
+  background-color: black;
+  font-family: var(--font1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left {
+  display: flex;
+}
+
+.nav-left span {
+  font-size: 35px;
+  padding-top: 10px;
+}
+
+.nav-left ul {
+  display: flex;
+  align-items: center;
+  margin: 0 77px;
+  font-size: 22px;
+  padding-bottom: 23px;
+}
+
+.nav-left ul li {
+  list-style: none;
+  margin: 0 14px;
+  font-family: var(--font2);
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-left ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-left ul li a:hover {
+  color: var(--main-bg-color);
+  font-weight: bolder;
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  margin-top: 32px;
+  padding: 9px;
+  position: relative;
+}
+
+.content::after {
+  content: "";
+  background-image: url("../img/11.svg");
+  position: absolute;
+  width: 100%;
+  height: inherit;
+  opacity: 0.15;
+  border-radius: 12px;
+}
+
+.content-left {
+  font-family: var(--font1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 49px;
+  z-index: 1;
+}
+
+.content-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-right img {
+  height: 355px;
+  border: 2px solid black;
+  border-radius: 200px;
+}
+
+/* .home-articles {
+  padding: 18px;
+  background-color: rgb(248, 239, 239, 0.5);
+  margin-top: 23px;
+  position: relative;
+} */
+
+.year-box {
+  position: absolute;  
+  right: 0px;
+  top: 100px;
+  width: 234px;
+  height: 255px;
+  font-size: 18px;
+}
+
+.year-box div {
+  margin: 12px 0px;
+}
+
+* {
+  margin: 0;
+  padding: 0; 
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.home-articles {
+  padding: 18px;
+  background-color: rgb(248, 239, 239, 0.5);
+  display: flex; /* Use flexbox for horizontal layout */
+  flex-wrap: wrap; /* Allows items to wrap onto the next line */
+  justify-content: space-between; /* Space items evenly */
+}
+
+.home-article {
+  display: flex;
+  flex-direction: column; /* Arrange content vertically inside the box */
+  margin: 23px; /* Space between boxes */
+  padding: 20px; /* Padding inside each box */
+  background-color: white; /* Background color for each blog box */
+  border: 1px solid #ccc; /* Border for each box */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  width: calc(23% - 20px); /* Width of each box to fit four in a row */
+  /* Subtracting margin space for proper alignment */
+}
+
+.home-article img {
+  width: 100%; /* Ensure the image takes the full width of the box */
+  border-radius: 5px; /* Slightly round the image corners */
+}
+
+.home-article-content {
+  align-self: center;
+  padding: 10px 0; /* Padding for content */
+}
+
+.home-article-content a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px; /* Font size for titles */
+  font-weight: bold; /* Bold titles */
+}
+
+@media (max-width: 768px) {
+  .home-article {
+    width: calc(48% - 20px); /* Two boxes per row on medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .home-article {
+    width: calc(100% - 20px); /* Single box per row on small screens */
+  }
+}
+
+
+.footer {
+  height: 50px;
+  background-color:black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-direction: column;
+}
+
+.footer a {
+  color: white;
+}
