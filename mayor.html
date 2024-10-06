@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/blog.css  ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adversary city</title>
+
+
+</head>
+
+<body>
+    <header>
+        <h1>THE ADVERSARY CITY: THE MAYOR'S DILEMMA</h1>
+    </header>
+
+    <div class="wrapper">
+        <div class="container">
+            <p> We are given a user handle named TheMayorADVCity. Using OSINT techniques we
+                searched for all available sources related to this user.</p>
+            <img src="img/My.png" alt="Log file details" style="width: 100%; max-width: 600px;">
+
+
+            <img src="img/m1.png" alt="Log file details" style="width: 100%; max-width: 600px;">
+
+            <p> An interesting handle was found from X(twitter) which have posts.
+            </p>
+            <img src="img/m2.png" alt="Log file details" style="width: 100%; max-width: 600px;">
+
+            <img src="img/m3.png" alt="Log file details" style="width: 100%; max-width: 600px;">
+            <p> There is a mention of RT_Leaks in one of the post. We had to do threat intelligence using
+                this information.
+                We conducted thorough searching in open forums, discord etc. But there were no results.
+                Then we checked telegram for any possible channels and we found a bot</p>
+
+
+            <img src="img/m4.png" alt="Log file details" style="width: 100%; max-width: 600px;">
+
+            <p> Interacting with the bot gave an option to show leaks, which gave a leak.text file.
+            </p>
+
+            <img src="img/m5.png" alt="Log file details" style="width: 100%; max-width: 600px;">
+
+            <p>Inside it we found a gcloud service account key</p>
+
+            <img src="img/m6.png" alt="Log file details" style="width: 100%; max-width: 600px;">
+
+            <p> Also scrolling down there was a flag</p>
+
+
+            <img src="img/m7.png" alt="Log file details" style="width: 100%; max-width: 600px;">
+
+            <p> AdversaryVilage{7HR34T_1N73L_F0R_1N1TI4L4TT4CK}
+                Listing the cloud functions gives us a function , and inside the function environment variables
+                we find the final flag.</p>
+            <img src="img/m8.png" alt="Log file details" style="width: 100%; max-width: 600px;">
+
+            <p><strong> Flag : AdversaryVillage{G0T_U_fUN7I05_S3CR37}</strong></p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Adversary Village. All rights reserved. | <a href="#">Contact Us</a></p>
+    </footer>
+</body>
+
+</html>

